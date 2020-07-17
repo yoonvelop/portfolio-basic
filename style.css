@@ -333,13 +333,13 @@ p {
   padding: 8px 48px;
 }
 
-.category__btn.active,
+.category__btn.selected,
 .category__btn:hover {
   background-color: var(--color-peach);
   color: var(--color-white);
 }
 
-.category__btn.active .category__count,
+.category__btn.selected .category__count,
 .category__btn:hover .category__count {
   opacity: 1;
   top: 0;
@@ -364,6 +364,13 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  transition: all var(--animation-duration) ease-out;
+  opacity: 1;
+}
+
+.work__projects.ani-out {
+  opacity: 0;
+  transform: scale(0.96) translateY(40px);
 }
 
 .project {
@@ -376,6 +383,10 @@ p {
   margin: 2px;
   position: relative;
   background-color: var(--color-bg-grey);
+}
+
+.project.invisible {
+  display: none;
 }
 
 .project__img {
