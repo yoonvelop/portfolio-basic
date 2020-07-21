@@ -3,11 +3,7 @@
 const navbar = document.querySelector("#navbar");
 const navbarHeight = navbar.getBoundingClientRect().height; //실제로 사용자에게 보여지는 사이즈를 가져오는 함수
 document.addEventListener("scroll", () => {
-  if (window.scrollY > navbarHeight) {
-    navbar.classList.remove("navbar--trans");
-  } else {
-    navbar.classList.add("navbar--trans");
-  }
+  transparentNavbar();
 });
 
 // Handle scrolling when tapping on the navbar menu
@@ -26,6 +22,12 @@ navbarMenu.addEventListener("click", (e) => {
 const navbarToggleBtn = document.querySelector(".navbar__toggle-btn");
 navbarToggleBtn.addEventListener("click", () => {
   navbarMenu.classList.toggle("open");
+  // Open navbar in dark mode
+  if (navbarMenu.classList.contains("open")) {
+    navbar.classList.remove("navbar--trans");
+  } else {
+    transparentNavbar();
+  }
 });
 
 // Handle click on "contact me" button on home
@@ -35,10 +37,11 @@ homeContactBtn.addEventListener("click", () => {
 });
 
 // Make home slowly fade to transparent as the window scrolls down
-const home = document.querySelector(".home__container");
+const home = document.querySelector("#home");
+const homeContainer = document.querySelector(".home__container");
 const homeHeight = home.getBoundingClientRect().height;
 document.addEventListener("scroll", () => {
-  home.style.opacity = 1 - window.scrollY / homeHeight;
+  homeContainer.style.opacity = 1 - window.scrollY / homeHeight;
 });
 
 // Show "arrow up" button when scrolling down
@@ -84,6 +87,14 @@ workBtnContainer.addEventListener("click", (e) => {
     projectContainer.classList.remove("ani-out");
   }, 300);
 });
+
+function transparentNavbar() {
+  if (window.scrollY > navbarHeight) {
+    navbar.classList.remove("navbar--trans");
+  } else {
+    navbar.classList.add("navbar--trans");
+  }
+}
 
 function scrollIntoView(selector) {
   const scrollTo = document.querySelector(selector);
